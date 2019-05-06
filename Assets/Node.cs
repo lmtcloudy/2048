@@ -12,6 +12,7 @@ public class Node : MonoBehaviour
     public Node xia;
     public Node zuo;
     public Node you;
+    public int[] position;
 
     public int ID
     {
