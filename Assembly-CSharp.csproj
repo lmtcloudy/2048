@@ -279,6 +279,12 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Unity2018.3/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Excel">
+      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>E:/UnityProgram/New Unity Project/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -293,30 +299,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>E:/UnityProgram/New Unity Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.MidEast">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/I18N.MidEast.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.Rare">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/I18N.Rare.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/I18N.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.CJK">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/I18N.CJK.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.Other">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/I18N.Other.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.West">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/I18N.West.dll</HintPath>
-    </Reference>
-    <Reference Include="Excel">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/Excel.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>E:/UnityProgram/New Unity Project/Assets/ReadExcal/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/Unity2018.3/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
