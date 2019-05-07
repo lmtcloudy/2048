@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Game : MonoBehaviour
     [SerializeField] Transform center;//棋盘放置容器
     [SerializeField] Node m_node;//预制体
     [SerializeField] Camera camera;
+    [SerializeField] Text content;
+    public int target = 2048;//目标分数
     Node[,] nodesPanel;//棋盘元素存放
     public List<Node> EmptyNodes = new List<Node>();//棋盘中没有数字的元素列表
     public List<Node> NotEmptyNodes = new List<Node>();//棋盘中有数字的元素列表
@@ -52,10 +55,13 @@ public class Game : MonoBehaviour
         int randomCount = Random.Range(1,3);
         for (int i = 0; i < randomCount; i++)
         {
-            int index = Random.Range(0,EmptyNodes.Count);
-            EmptyNodes[index].ID = 1;
-            NotEmptyNodes.Add(EmptyNodes[index]);
-            EmptyNodes.RemoveAt(index);
+            if(randomCount <= EmptyNodes.Count)
+            {
+                int index = Random.Range(0, EmptyNodes.Count);
+                EmptyNodes[index].ID = 1;
+                NotEmptyNodes.Add(EmptyNodes[index]);
+                EmptyNodes.RemoveAt(index);
+            }
         }
     }
     //获取每个棋盘元素的周围元素
@@ -75,14 +81,196 @@ public class Game : MonoBehaviour
     }
     public void TapShang()
     {
-        SetNum();
-        NotEmptyNodes.Sort((x,y)=> {
-            if(x.position[1] > y.position[1])
+        bool isOK = false;
+        while(!isOK)
+        {
+            int NoMove = 0;
+            NotEmptyNodes.Sort((x, y) => {
+                return y.position[1].CompareTo(x.position[1]);
+            });
+            for (int i = 0; i < NotEmptyNodes.Count; i++)
             {
-                return 1;
+                if (NotEmptyNodes[i].shang != null)
+                {
+                    if (NotEmptyNodes[i].shang.ID == 0)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].shang.ID = NotEmptyNodes[i].ID;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                    else if (NotEmptyNodes[i].shang.ID == NotEmptyNodes[i].ID)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].shang.ID *= 2;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                }
             }
-            return 0;
-        });
+            GetNotAndEmpty();
+            if(NoMove ==0)
+            {
+                SetNum();
+                isOK = true;
+            }
+        }
+    }
+    public void TapXia()
+    {
+        bool isOK = false;
+        while (!isOK)
+        {
+            int NoMove = 0;
+            NotEmptyNodes.Sort((x, y) => {
+                return x.position[1].CompareTo(y.position[1]);
+            });
+            for (int i = 0; i < NotEmptyNodes.Count; i++)
+            {
+                if (NotEmptyNodes[i].xia != null)
+                {
+                    if (NotEmptyNodes[i].xia.ID == 0)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].xia.ID = NotEmptyNodes[i].ID;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                    else if (NotEmptyNodes[i].xia.ID == NotEmptyNodes[i].ID)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].xia.ID *= 2;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                }
+            }
+            GetNotAndEmpty();
+            if (NoMove == 0)
+            {
+                SetNum();
+                isOK = true;
+            }
+        }
+    }
+    public void TapZuo()
+    {
+        bool isOK = false;
+        while (!isOK)
+        {
+            int NoMove = 0;
+            NotEmptyNodes.Sort((x, y) => {
+                return x.position[1].CompareTo(y.position[1]);
+            });
+            for (int i = 0; i < NotEmptyNodes.Count; i++)
+            {
+                if (NotEmptyNodes[i].zuo != null)
+                {
+                    if (NotEmptyNodes[i].zuo.ID == 0)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].zuo.ID = NotEmptyNodes[i].ID;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                    else if (NotEmptyNodes[i].zuo.ID == NotEmptyNodes[i].ID)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].zuo.ID *= 2;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                }
+            }
+            GetNotAndEmpty();
+            if (NoMove == 0)
+            {
+                SetNum();
+                isOK = true;
+            }
+        }
+    }
+    public void TapYou()
+    {
+        bool isOK = false;
+        while (!isOK)
+        {
+            int NoMove = 0;
+            NotEmptyNodes.Sort((x, y) => {
+                return y.position[0].CompareTo(x.position[0]);
+            });
+            for (int i = 0; i < NotEmptyNodes.Count; i++)
+            {
+                if (NotEmptyNodes[i].you != null)
+                {
+                    if (NotEmptyNodes[i].you.ID == 0)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].you.ID = NotEmptyNodes[i].ID;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                    else if (NotEmptyNodes[i].you.ID == NotEmptyNodes[i].ID)
+                    {
+                        NoMove++;
+                        NotEmptyNodes[i].you.ID *= 2;
+                        NotEmptyNodes[i].ID = 0;
+                    }
+                }
+            }
+            GetNotAndEmpty();
+            if (NoMove == 0)
+            {
+                SetNum();
+                isOK = true;
+            }
+        }
+    }
+    public void GetNotAndEmpty()
+    {
+        NotEmptyNodes.Clear();
+        EmptyNodes.Clear();
+        int Max = 0;
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < line; j++)
+            {
+                if (nodesPanel[j, i].ID > Max)
+                {
+                    Max = nodesPanel[j, i].ID;
+                    content.text = Max.ToString();
+                }
+                if (nodesPanel[j, i].ID == target)
+                {
+                    content.text = "你赢了！！！";
+                    break;
+                }
+                if (nodesPanel[j, i].ID > 0)
+                {
+                    NotEmptyNodes.Add(nodesPanel[j, i]);
+                }
+                else
+                {
+                    EmptyNodes.Add(nodesPanel[j, i]);
+                }
+            }
+        }
+    }
+    //重置游戏
+    public void ResetGame()
+    {
+        NotEmptyNodes.Clear();
+        EmptyNodes.Clear();
+        content.text = "0";
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < line; j++)
+            {
+                nodesPanel[j, i].ID = 0;
+                if (nodesPanel[j, i].ID > 0)
+                {
+                    NotEmptyNodes.Add(nodesPanel[j, i]);
+                }
+                else
+                {
+                    EmptyNodes.Add(nodesPanel[j, i]);
+                }
+            }
+        }
+        SetNum();
     }
 }
  
